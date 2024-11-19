@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGED</title>
+
+    <style>
+        * {
+            font-family: sans-serif;
+            letter-spacing: 1pt;
+        }
+
+        p {
+            font-weight: 200;
+            max-width: 70vw;
+        }
+
+        body {
+            margin: 0px;
+            color: #4e5c57;
+        }
+
+        .page {
+            min-height: 70vh;
+            padding: 60px;
+            position: relative;
+        }
+
+        .page h1 {
+            font-size: 60px;
+            font-size: 4vw;
+            line-height: calc(4vw * 1);
+            color: #555555;
+            max-width: 800px;
+            display: inline-block;
+        }
+
+        .page.gray h1 {
+            color: #eeeeee;
+        }
+
+        .gray {
+            background-color: #4e5c57;
+            color: white;
+        }
+
+        .box {
+            display: inline-block;
+            margin: 0 16px 16px 0;
+            padding: 32px 46px;
+            border: 0px solid #bbbbbb;
+            background-color: rgb(97, 187, 49);
+            /*color: #333333;*/
+            border-radius: 18px;
+            font-size: 18px;
+            color: white;
+
+        }
+
+        .box:nth-child(2) {
+            background-color: rgb(84, 162, 43);
+        }
+
+        .box:nth-child(3) {
+            background-color: rgb(74, 135, 41);
+        }
+
+
+
+        .mesas-svg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            vertical-align: middle;
+            display: inline-block;
+            z-index: -1;
+            width: 78%;
+        }
+
+        .rollable {
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+
+            opacity: 1;
+        }
+
+        .rollable:hover {
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+
+
+        }
+
+
+
+        span.number {
+            font-size: 42px;
+            vertical-align: middle;
+            font-weight: 600;
+        }
+
+        .box-mesachica {
+            line-height: 32px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .box-mesachica span.number1 {
+            font-size: 18px;
+            vertical-align: middle;
+            font-weight: 600;
+            color: rgb(58, 219, 255);
+        }
+
+        .timelinecont {
+
+            width: 100%;
+            overflow-x: scroll;
+
+        }
+
+
+        .dimensiones {
+            display: flex;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flexAuto {
+            display: flex;
+            align-items: center;
+        }
+
+        .flexAuto>*:nth-child(1) {
+            padding: 0px;
+            flex: 1;
+            text-align: right;
+        }
+
+        .flexAuto>*:nth-child(2) {
+            padding: 20px;
+            flex: 5;
+        }
+
+        .flex>div {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .dimensiones .dbox {
+            flex: 1;
+            margin: 0;
+            padding: 32px;
+            border: 0px solid #bbbbbb;
+
+            color: #333333;
+            border-radius: 0px;
+
+
+        }
+
+
+
+        .dimensiones .dbox ul {
+
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dimensiones .dbox ul li {
+            padding: 20px 0;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .flex>div.Mbox {
+            padding: 0;
+            margin: 0;
+        }
+
+        .suscribite {
+
+            padding: 8px 20px;
+            border: 0px solid #555555;
+            background-color: #c2e98a;
+            margin: 20px;
+            border-radius: 16px;
+            cursor:pointer;
+            transition: all 0.3s ease-in-out;
+        }
+.suscribite:hover{
+    background-color:#555555;
+           color: #c2e98a;
+           transition: all 0.3s ease-in-out;
+}
+
+        .pdfs a {
+            display: inline-block;
+            margin: 0 12px 12px 0;
+            text-decoration: none;
+            color: #61a007;
+            transition: color 0.5s ease-in-out;
+        }
+
+        .pdfs a:hover {
+            transition: color 0.5s ease-in-out;
+            color: #3c5e0b;
+        }
+
+        .pdfs a img {
+            height: 200px;
+        }
+
+
+
+        .page.dark {
+            background-color: #313a37;
+            color: rgb(220, 220, 220);
+        }
+
+        .page.dark h1 {
+            color: rgb(187, 187, 187);
+        }
+
+ 
+
+
+        @media(max-width: 956px) {
+
+            h1 {
+
+                font-size: 6vw !important;
+                line-height: 6vw !important;
+            }
+
+            .page {
+                min-height: 70vh;
+                padding: 24px;
+                position: relative;
+            }
+
+            .flex {
+                display: block;
+            }
+
+            .flexAuto {
+                display: block;
+                align-items: center;
+            }
+
+            .flexAuto span {
+                display: block;
+                text-align: left;
+            }
+
+            .flexAuto>*:nth-child(1) {
+                text-align: left;
+                margin-top: 20px;
+            }
+
+            .flexAuto>*:nth-child(2) {
+                padding: 0px;
+
+            }
+
+            .dimensiones {
+                display: block;
+            }
+
+
+
+        }
+
+        .thumb {
+            width: 80px;
+            display: inline-block;
+        }
+
+        .logos {
+            text-align: center;
+        }
+
+        .logos img {
+            width: 100%;
+            max-width: 1200px;
+
+        }
+
+        .logos img.uno {
+            width: 50%;
+            max-width: 600px;
+
+        }
+
+
+        /*MAPA*/
+        .pop {
+            position: absolute;
+            display: none;
+            width: 240px;
+            padding: 12px;
+            background-color: #ffffffee;
+            border: 0px solid #ffffff;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 18px;
+            color: #131313;
+        }
+
+        .mapa {
+            background-color: #313a37;
+            position: relative;
+        }
+
+        svg #features path.tipo_sinide {
+            fill: #1874ae;
+        }
+
+        svg #features path.tipo_siged {
+            fill: #9ee37d88;
+        }
+
+        svg #features path.tipo_propio {
+            fill: rgb(154, 201, 14);
+        }
+
+        svg #features path.tipo_noinfo {
+            fill: #04364b;
+        }
+
+        svg #features>path.over {
+            fill: #111111;
+        }
+
+
+
+
+
+        svg #label_points circle {
+
+            fill: #aaaaaaaa;
+            stroke: #11111166;
+            stroke-width: 3;
+            cursor: pointer;
+            display: none;
+        }
+
+        svg #label_points circle:hover {
+            stroke: #eeeeee;
+            fill: #ffffff;
+
+        }
+
+
+
+
+
+
+
+        .apartado {
+            position: relative;
+            display: block;
+            margin: 0 16px 16px 0;
+            padding: 32px 46px 46px;
+            border: 0px solid #bbbbbb;
+            background-color: rgb(84, 162, 43);
+            /*color: #333333;*/
+            border-radius: 24px;
+            font-size: 18px;
+            color: white;
+
+        }
+
+        .apartado .abrir {
+            display: none;
+            margin-top: 24px;
+            box-sizing: border-box;
+
+
+            
+        }
+
+        .apartado .abrir.hided {
+            display: none;
+            margin-top: 24px;
+            box-sizing: border-box;
+
+
+            
+        }
+
+        .apartado .abrir .ul {
+            position: relative;
+            margin: 0 0 16px 0;
+        }
+
+        .apartado .abrir .ul .li {
+            font-size: 24px;
+            position: relative;
+            margin: 0px 0 0 0;
+            transform-origin: left;
+            transform: scale(0.7);
+        }
+
+        .apartado h3 {
+            margin: 0px;
+            position: relative;
+            max-width: calc( 100% - 40px);
+        }
+
+        .apartado h4 {
+            margin: 0px;
+            position: relative;
+            max-width: calc( 100% - 40px);
+        }
+
+        .apartado .boxCat {
+            position: relative;
+            background-color: rgb(61, 99, 95);
+            margin: 4px 0px 4px 0px;
+            padding: 24px;
+            border-radius: 16px;
+
+        }
+
+        .apartado .boxSubCat {
+            position: relative;
+            background-color: rgb(90, 135, 130);
+            margin: 4px 0px 4px 0px;
+            padding: 24px;
+            border-radius: 10px;
+        }
+
+        .apartado .boxSubCat:nth-child(2) {
+            margin: 26px 0px 4px 0px;
+        }
+
+        .apartado .boxSubCat:last-child {
+            margin: 4px 0px 20px 0px;
+        }
+
+        .apartado .abrirBut {
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+
+        }
+
+        .apartado .abrirBut:hover, .apartado .abrirBut.opened{
+            color:  #94d6ff;
+        }
+
+        .apartado .abrirBut:hover svg path, .apartado .abrirBut.opened  svg path{
+            stroke:  #94d6ff;
+        }
+
+        .apartado .arrow {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+            margin: 16px;
+            transform: rotate(-90deg) scale(0.8);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .apartado .arrow.opened {
+            transform: rotate(0deg) scale(0.8);
+            transition: transform 0.4s ease-in-out;
+        }
+        #color-list li {
+    position: relative;
+    padding-left: 30px; /* Space for the colored bar */
+    margin: 5px 0;
+}
+
+/* Style for the left color bar */
+#color-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+}
+#color-list li:nth-child(1)::before {
+background-color: #9ee37d88; /* Will be set by JavaScript */
+}
+#color-list li:nth-child(2)::before {
+background-color: #1874ae; /* Will be set by JavaScript */
+}
+#color-list li:nth-child(3)::before {
+background-color: rgb(154, 201, 14); /* Will be set by JavaScript */
+}
+#color-list li:nth-child(4)::before {
+background-color: #04364b; /* Will be set by JavaScript */
+}
+.tabs{
+    font-size: 18px;
+line-height: 22px;
+}
+.tabs b{
+    color:#111111;
+}
+.tabs .abrir{
+    margin: 12px;
+    padding:24px;
+}
+
+footer{
+    padding:24px;
+    padding-top:60px;
+    background: #efefef;
+    text-align: right;
+    padding:24px 5%;
+color:#999999;
+font-size: 12px;    
+}
+footer a,footer a:visited{
+    color:#bbbbbb;
+font-size: 12px;    
+text-decoration: none;
+}
+footer a:hover{
+    color:#888888;
+font-size: 12px;    
+text-decoration: none;
+}
+    </style>
+</head>
+
+<body>
+
+    <div class='page' style='min-height: auto;'>
+
+        <div class='logos'>
+            <img src='Oei-saie-bid.jpg'>
+
+
+        </div>
+    </div>
+
+
+    <div class='page' style='z-index: -1;'>
+
+        <div class='graphic mesas-svg'>
+           <!-- <svg id="svgCanvas" viewBox='0 0 1000 1000' xmlns="http://www.w3.org/2000/svg"></svg>-->
+           <svg id="svgCanvas" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><circle cx="1000" cy="500" r="400" stroke="#35860088" stroke-width="60" fill="none"></circle><circle cx="1000" cy="500" r="330" stroke="#63c13288" stroke-width="60" fill="none"></circle><circle cx="1000" cy="500" r="260" stroke="#9ee37d88" stroke-width="60" fill="none"></circle><circle cx="1000" cy="500" r="190" stroke="#aaefdf88" stroke-width="60" fill="none"></circle><circle cx="1000" cy="500" r="120" stroke="#3adbff88" stroke-width="60" fill="none"></circle></svg>
+        </div>
+
+        <div class='flex'>
+            <div>
+                <h1>Mesas de diálogo para el fortalecimiento de los SIGED en Argentina</h1><br>
+
+                <p> La Organización de Estados Iberoamericanos (OEI), el Banco Interamericano de Desarrollo (BID) y la
+                    Sociedad Argentina de Investigadores/as en Educación (SAIE) vienen desarrollando desde el año 2023
+                    mesas de diálogo e intercambio para promover el fortalecimiento y ampliar los usos de los Sistemas
+                    de Información para la Gestión Educativa (SIGED) en la Argentina y proponer temas de agenda en torno
+                    a diferentes dimensiones relativas a la producción y a los usos de información vinculados al
+                    planeamiento, la gestión y el monitoreo de acciones, políticas, programas e intervenciones
+                    institucionales. </p>
+
+
+                <br><br>
+                <!--
+
+                    <small style='font-size: 24px;font-weight: 200;line-height: 30px;'>Instituciones organizadoras y actores
+                        participantes</small>-->
+            </div>
+            <div></div>
+        </div>
+
+
+        <div class='flex' style='margin:0 auto;'>
+            <div class='box-mesachica'>
+
+                <h2 style='margin-top:36px;margin-bottom:56px;'>Comité organizador</h2>
+
+                <span class='number1'>
+                    Tamara Vinacur y Silvina Alegre </span><span>(BID)</span><br>
+                <span class='number1'>
+                    Sebastián Fuentes y Juan Suasnábar </span><span>(SAIE)</span><br>
+                <span class='number1'>
+                    Lilia Toranzos y Nancy Montes </span><span>(OEI)</span><br>
+                <br><br>
+
+                <span class='number1'>Delia González </span><span>(UNIPE)</span><br>
+                <span class='number1'>Martín Scasso </span><span>(Fundación Quántitas, Consultor UNESCO
+                    Santiago)</span><br>
+                <span class='number1'>Julián Falcone </span><span>(SEDUC-UEICEE)</span><br>
+                <span class='number1'>Leandro Bottinelli </span><span>(UNIPE)</span><br>
+
+                </span><br>
+            </div>
+            <div class='box-mesa' style='margin-right: 80px;'>
+                <div class='flexAuto'><span></span>
+                    <h2>Participantes de las Mesas de diálogo</h2>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>65</span><span>Funcionarios y técnicos de 8 jurisdicciones educativas</span>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>6</span><span>Organismos regionales</span>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>6</span><span>Universidades y centros de investigación</span>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>4</span><span>Organizaciones de la sociedad civil (asociaciones, fundaciones y
+                        think tanks)</span>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>90</span><span>Participantes virtuales en las Mesas </span>
+                </div>
+                <div class='flexAuto'>
+                    <span class='number'>150</span><span>Participantes totales</span>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+        <br><br>
+
+        <h2>Objetivos</h2>
+        <div>
+            <div class='box'>Promover el uso de la información educativa para la toma de decisiones, la planificación y
+                la
+                mejora de las trayectorias escolares</div>
+
+            <div class='box'>Generar ámbitos de intercambio para visibilizar la producción de conocimiento y los
+                desarrollos
+                de los SIGED </div>
+
+            <div class='box'>Generar consensos para la consolidación e inversión en el fortalecimiento de los SIGED como
+                herramientas para la mejora educativa</div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class='page gray dark'>
+
+        <!-- <p style='max-width: 800px;'>Los SIGED son sistemas nominales de estudiantes que brindan apoyo para la
+            realización de tareas administrativas y pedagógicas, al tiempo que generan una enorme cantidad de datos que pueden ser utilizados para nutrir sistemas de alerta temprana para evitar la desvinculación de los/as estudiantes en situación de vulnerabilidad socioeducativa, tener diagnósticos completos sobre las trayectorias estudiantiles, diseñar programas que contribuyan a intervenir a tiempo y, en base a evidencia empírica, sobre diversas problemáticas del aula, las escuelas, las regiones de supervisión y los sistemas educativos.</p>
+
+        <br>-->
+
+
+        <!-- <div class='timelinecont'>
+          
+            <div id="timelineCanvas"></div>
+        </div>-->
+
+        <div class='flex' style='align-items: center;'>
+
+
+            <div style='vertical-align: middle;' class='Mbox'>
+                <h1>Los SIGED en Argentina</h1> <br>
+                <p style="display:none;font-size: 22px;line-height:30px;">Los SIGED son sistemas nominales de estudiantes que brindan
+                    apoyo para la realización de tareas administrativas y pedagógicas, al tiempo que generan una enorme
+                    cantidad de datos que pueden ser utilizados para nutrir sistemas de alerta temprana para evitar la
+                    desvinculación de los/as estudiantes en situación de vulnerabilidad socioeducativa, tener
+                    diagnósticos completos sobre las trayectorias estudiantiles, diseñar programas que contribuyan a
+                    intervenir a tiempo y, en base a evidencia empírica, sobre diversas problemáticas del aula, las
+                    escuelas, las regiones de supervisión y los sistemas educativos.</p>
+
+                    <p style=" font-size: 18px;line-height:24px;">Un SIGED (sistema de gestión e información educativa) es un conjunto de procesos clave de gestión educativa que permite diseñar, registrar, procesar y difundir información estratégica en línea de manera integral, respaldado por una infraestructura legal, institucional y tecnológica <sup style='color:rgb(154, 201, 14);'>(1)</sup>. La generación de registros digitales nominalizados ofrece información detallada sobre instituciones, docentes y estudiantes, lo cual resulta esencial para el diagnóstico, la planificación y la implementación de políticas educativas. Además, estos sistemas de información fortalecen la gobernanza del sistema educativo, promueven la rendición de cuentas y permiten la implementación de Sistemas de Alerta Temprana, facilitando la identificación y la organización de estrategias de apoyo a estudiantes con situaciones que ponen en riesgo la continuidad, la terminalidad y el buen desempeño escolar.
+
+</p><br><br><br><br>
+    <small style='opacity:0.7'><sup style='color:rgb(154, 201, 14);'>(1)</sup> Arias Ortiz, E.; Eusebio, J.; Pérez Alfaro, M.; Vásquez, M., y Zoido, P. (2021). Los Sistemas de Información y Gestión Educativa (SIGED) de América Latina y el Caribe: la ruta hacia la transformación digital de la gestión educativa. Washington, DC: Banco Interamericano de Desarrollo.</small>
+
+                <!--Los siged en la Región-->
+                <!-- <img src='ar-region.svg' width='100%'>-->
+            </div>
+            <div style='vertical-align: middle;' class='Mbox mapa'>
+                <!--Los siged en Argentina -->
+                <img src='ar-mapa.svg' width='100%'>
+            </div>
+        </div>
+
+<div style='text-align: right;right:0;'><ul style='list-style:none;font-size:12px;display:inline-block;width:auto;text-align: left;' id="color-list">
+    <li>SIGED</li>
+    <li>SInIDE Gestión Escolar</li>
+    <li>Sistema propio</li>
+    <li>Sin información</li>
+</ul></div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class='page'>
+        <h1>Dimensiones de los SIGED</h1><br>
+
+
+
+        <div class='apartado'>
+
+            <h2>CONDICIONES DE POSIBILIDAD</h2>
+
+
+            <div class='boxCat'>
+
+                <h3>Federalismo y gobernanza</h3>
+                <div class='abrir'>
+                    <div class='ul'>
+                        <div class='li'>¿Existen agendas convergentes o divergentes entre las provincias y el ámbito
+                            nacional?</div>
+                        <!--/li-->
+                        <div class='li'> ¿Qué aspectos son relevantes para avanzar en los consensos necesarios para
+                            consolidar una
+                            base
+                            federal de
+                            información nominalizada de estudiantes? 
+                        </div>
+                        <!--/li-->
+                        <div class='li'>
+                            ¿Existen los marcos normativos adecuados para
+                            avanzar en
+                            los usos
+                            prescriptos y en la definición de quiénes pueden acceder a qué tipo de información?</div>
+                        <!--/li-->
+                        <div class='li'> ¿Qué dimensiones y actores (por sus roles estratégicos) no deberían estar
+                            ausentes de las
+                            mesas de
+                            diálogo
+                            para el fortalecimiento de los SIGED?
+                        </div>
+                        <!--/li-->
+                    </div>
+                    <!--/ul-->
+                </div>
+            </div>
+
+
+            <div class='boxCat'>
+                <h3>Condiciones estructurales</h3>
+
+                <div class='boxSubCat'>
+                    <h4>Infraestructura del Sistema - Arquitectura de las bases de datos</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'>¿Qué tipos de bases de datos y sistemas de almacenamiento se utilizan en el
+                                desarrollo de
+                                los
+                                SIGED? </div>
+                            <!--/li-->
+
+                            <div class='li'>¿Cómo
+                                se gestiona la escalabilidad de las bases de datos?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Qué herramientas de gestión y monitoreo de bases de datos se utilizan?
+                            </div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+
+                <div class='boxSubCat'>
+                    <h4>Plataformas tecnológicas y de software</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'>¿Con qué lenguajes y plataformas se están desarrollando los SIGED?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Cómo se maneja la interoperabilidad entre diferentes plataformas y
+                                sistemas?
+                            </div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+
+                <div class='boxSubCat'>
+                    <h4>Seguridad - Encriptación, autenticación y autorización</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'>¿Qué mecanismos se están implementando para garantizar la seguridad
+                                informática, la
+                                protección de los datos
+                                personales?
+                            </div>
+                            <!--/li-->
+
+                            <div class='li'>¿Qué estándares o protocolos de encriptación se utilizan para proteger la
+                                información?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Qué medidas se toman para prevenir ataques o brechas de seguridad?
+
+                            </div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+
+                <div class='boxSubCat'>
+                    <h4>Perfiles a cargo de los desarrollos, soporte y mantenimiento</h4>
+
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'> ¿Qué áreas de los ministerios de educación están involucradas en el
+                                desarrollo y
+                                sostenimiento de los SIGED?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Cómo se relacionan entre sí? ¿Qué recursos hay disponibles para ello?
+                            </div>
+                            <div class='li'> ¿Qué perfiles profesionales son requeridos para el desarrollo y
+                                sostenimiento de los SIGED y
+                                de qué manera
+                                se cubre la necesidad de los mismos? </div>
+                            <!--/li-->
+
+                            <div class='li'>¿Se requieren modificaciones en las plantas funcionales
+                                de los
+                                ministerios y las áreas dedicadas al tema?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Se desarrollan estrategias de formación y capacitación en las tecnologías
+                                y prácticas del
+                                SIGED?</div>
+                            <!--/li-->
+
+                            <div class='li'> ¿Se
+                                elabora documentación destinada a que los usuarios finales tengan los recursos para el
+                                aprovechamiento de la
+                                información generada por los SIGED?
+                            </div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+
+
+            </div>
+            <div class='boxCat'>
+                <h3>Aspectos normativos de los datos estadísticos y administrativos</h3>
+                <div class='abrir'>
+                    <div class='ul'>
+                        <div class='li'> ¿Cuáles son los desafíos que hoy enfrentan los marcos normativos nacionales en
+                            relación a dos
+                            aspectos?: a)
+                            la generación y almacenamiento de los datos y b) su difusión y uso.
+                        </div>
+                        <!--/li-->
+
+                        <div class='li'> ¿Existe una tensión no resuelta entre el cuerpo normativo que responde a la
+                            lógica de protección
+                            de datos
+                            personales y la que regula la habilitación de la información pública por el otro?
+                        </div>
+                        <!--/li-->
+                        <div class='li'>¿Qué pasos son fundamentales para avanzar en una mayor adecuación entre los
+                            marcos normativos
+                            vigentes y los
+                            desafíos que hoy enfrentan los sistemas de información educativa en Argentina? </div>
+                        <!--/li-->
+                        <div class='li'>
+                            ¿Qué actores
+                            deben intervenir
+                            en los avances para esa adecuación?</div>
+                        <!--/li-->
+                    </div>
+                    <!--/ul-->
+                </div>
+            </div>
+
+        </div>
+
+        <div class='apartado'>
+            <h2>USOS EN DIFERENTES NIVELES DEL GOBIERNO DE LA EDUCACIÓN </h2>
+
+            <div class='boxCat'>
+                <h3>Uso de información en gestión territorial y escolar en procesos y problemáticas pedagógicas</h3>
+                <div class='abrir'>
+                    <div class='ul'>
+                        <div class='li'> ¿Qué usos concretos de información han desarrollado en los últimos dos años
+                            orientados a
+                            intervenir sobre
+                            aspectos y problemáticas pedagógicas?</div>
+                        <!--/li-->
+                        <div class='li'>¿Es posible identificar resultados específicos derivados de esos usos?</div>
+                        <!--/li-->
+                        <div class='li'>En particular interesan aquellos resultados que hacen foco en los procesos de
+                            trabajo e
+                            intervenciones pedagógicas a nivel territorial y escolar, ¿Es posible identificar estos
+                            resultados?</div>
+                        <!--/li-->
+                        <div class='li'> ¿Qué aspectos consideran los agentes territoriales que favorecen los usos de
+                            información y
+                            cuáles los
+                            obstaculizan?
+                        </div>
+                        <!--/li-->
+                    </div>
+                    <!--/ul-->
+                </div>
+
+            </div>
+
+
+
+            <div class='boxCat'>
+                <h3>Usos de los SIGED, de los SAT y de los productos de los sistemas de información en el sector
+                    educativo</h3>
+
+                <div class='boxSubCat'>
+                    <h4>Usos actuales y usos potenciales</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'>
+                                ¿Cuál es el escenario actual de uso de información educativa a nivel nacional y
+                                jurisdiccional? </div>
+                            <!--/li-->
+
+                            <div class='li'> ¿Cuáles son
+                                aquellos aportes que está realizando la disponibilidad de información nominalizada de
+                                estudiantes?
+                            </div>
+                            <!--/li-->
+                            <div class='li'> ¿Qué tipos de usos basados en datos nominales pueden identificarse como
+                                innovaciones
+                                prometedoras,
+                                considerando tanto experiencias recientes como posibles desarrollos futuros? ¿De qué
+                                tipo de
+                                usos se trata?</div>
+                            <!--/li-->
+
+                            <div class='li'> ¿Son los Sistemas de Alerta Temprana (SAT) una herramienta que habilita
+                                usos específicos?
+                            </div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+
+                <div class='boxSubCat'>
+                    <h4>Usuarios/as actuales y usuarios/as potenciales</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                          <div class='li'>
+                        ¿Quiénes son los/as usuarios/as más habituales de la información nominalizada?
+                    </div>
+                    <div class='li'> ¿A qué nivel
+                        de gestión
+                        pertenecen y qué tipo de función cumplen? 
+                    </div>
+                    <!--/li-->
+                    <div class='li'>¿De qué manera acceden a la información y qué
+                        hacen con ella?</div>
+                        <div class='li'>
+                        ¿Cuáles son los actores del sistema que pueden considerarse como usuarios/as potenciales de
+                        información
+                        nominalizada, que aún no han incorporado estas herramientas? </div>
+                        <div class='li'>
+                            ¿Qué tipo de desarrollos y
+                        apoyos se requieren
+                        para hacerlo?</div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class='boxSubCat'>
+                    <h4>Factores que favorecen o restringen lo usos</h4>
+                    <div class='abrir'>
+                        <div class='ul'>
+                            <div class='li'>
+
+                                ¿Qué factores operan como facilitadores (condiciones tecnológicas, disponibilidad de
+                                herramientas y recursos
+                                de información, experiencias de formación, configuraciones de política educativa)?</div>
+                            <!--/li-->
+                            <div class='li'>
+                                En un sentido opuesto, ¿qué condiciones, elementos o factores están actualmente
+                                limitando o
+                                restringiendo el
+                                uso de información nominalizada?</div>
+                            <!--/li-->
+                        </div>
+                        <!--/ul-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='apartado'>
+            <h2>PRODUCCIÓN DE CONOCIMIENTO</h2>
+            <div class='boxCat'>
+                <h3>Desarrollo de los SIGED en Argentina - buenas prácticas y resultados</h3>
+                <div class='abrir'>
+                    <div class='ul'>
+                        <div class='li'>¿Cómo se puede caracterizar el desarrollo de los SIGED y de los SAT en la
+                            Argentina en los últimos
+                            años?</div>
+                        <!--/li-->
+                        <div class='li'>¿Cuál es el estado de situación en relación con la digitalización de datos y la
+                            automatización en la
+                            carga
+                            de los mismos?
+                        </div>
+                        <!--/li-->
+                        <div class='li'>¿Qué buenas prácticas es posible identificar en cuanto a modos de acceso a
+                            información (niveles y
+                            tipos,
+                            temporalidades, plataformas)?
+                        </div>
+                        <!--/li-->
+
+                        <div class='li'> ¿Es posible identificar resultados específicos derivados del uso de los SIGED y
+                            de los SAT en
+                            intervenciones
+                            pedagógicas, esquemas de planificación y seguimiento de establecimientos y de estudiantes?
+                        </div>
+                        <!--/li-->
+                    </div>
+                    <!--/ul-->
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class='page gray' style='height:auto;min-height: auto;'>
+        <h1>Mesas</h1>
+        <div class='mesas'>
+
+            <div class='timelinecont'>
+                <div id="timelineMesas"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class='page dark net'>
+
+        <h1>Producción de conocimiento </h1><br>
+        <p>Un propósito de los encuentros federales y multiactorales es poner en común las producciones de
+            conocimiento más recientes 
+            en torno a los temas que enmarcan y organizan el diseño e implementación de los SIGED y los incipientes
+            desarrollos de Sistemas de Alerta Temprana en el país.</p>
+
+        <br><br><br>
+
+
+        <div class='pdfs'>
+
+
+
+
+            <a target='_blank' href='https://oei.int/oficinas/argentina/publicaciones/documento-hacia-el-fortalecimiento-de-un-sistema-nacional-de-informacion-educativa-en-clave-nominalizada/' title="Aspectos normativos.pdf"><img
+                    src='pdf/normativos.png'></a>
+
+            <a target='_blank'
+                href='https://www.cippec.org/publicacion/metodologia-para-el-desarrollo-de-un-sat-provincial-y-la-planificacion-de-su-implementacion/'
+                title="Metodologia-para-el-desarrollo-de-un-SAT-provincial-y-la-planificacion-de-su-implementacion.pdf"><img
+                    src='pdf/dt-228.png'></a>
+
+            <a target='_blank'
+                href='https://publications.iadb.org/es/los-sistemas-de-informacion-y-gestion-educativa-siged-de-america-latina-y-el-caribe-la-ruta-hacia'
+                title="la-ruta-hacia-la-transformacion-digital-de-la-gestion-educativa.pdf"><img
+                    src='pdf/estudiobid.png'></a>
+
+
+                    <a target="_blank" href="pdf/GT01_02_Montes_Fuentes GT Estadísticas V Coloquio.pdf" title="Estadísticas V Coloquio.pdf"><img src="pdf/gt01.png"></a>
+
+
+                    <a target="_blank" href="pdf/GT01_03_ALVAREZ TORANZOS GT usos de la información SAIE 2024.pdf" title="usos de la información SAIE 2024.pdf"><img src="pdf/gt01_3.png"></a>
+
+            <a target='_blank' href='https://www.buenosaires.iiep.unesco.org/es/publicaciones/uso-de-los-sistemas-de-informacion-en-el-planeamiento-y-gestion-de-politicas' ><img
+                    src='pdf/usosDaniel.jpg'></a>
+
+
+                    <a target='_blank' href='https://unesdoc.unesco.org/ark:/48223/pf0000385439'  ><img
+                        src='pdf/usosNancyMontes.jpeg'></a>
+
+                    
+            <a target='_blank' href='https://unesdoc.unesco.org/ark:/48223/pf0000389743_spa' title="Foro 2023"><img
+                    src='pdf/policibrief.png'>
+                </a>
+                 
+
+                     <a target='_blank' href='https://www.cippec.org/wp-content/uploads/2024/05/EDU-Sistemas-de-proteccion-de-trayectorias-educativas-en-Argentina.pdf'
+                     title="Sistemas de protección"><img src='pdf/sistemasproteccion.png'></a>
+                    
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class='page net'>
+        <div class='Cells' style='position:absolute;top:0;left:0;right:0;'></div>
+        <div class='Cells' style='position:absolute;top:45%;left:0;right:0;'></div>
+        <div class='Cells' style='position:absolute;bottom:0;left:0;right:0;'></div>
+         
+        <div class='comoApp'> 
+        <h1>¿Cómo se pueden fortalecer los SIGED? </h1><br>
+        <p  ><h3>El potencial transformador de los Sistemas de Información y Gestión Educativa (SIGED)</h3>
+            El valor de los SIGED radica en su capacidad para generar de manera continua información precisa, accesible y procesable, que puede guiar desde la asignación de recursos hasta la identificación temprana de estudiantes en riesgo de desvinculación. A través de los SIGED, los gobiernos y las instituciones educativas pueden diseñar y evaluar políticas más efectivas, mejorar la gestión escolar y garantizar que las decisiones se tomen de manera informada, orientadas hacia el fortalecimiento de las trayectorias educativas.</p>
+            <p>Los sistemas de información pueden ser implementados de manera incremental, comenzando con las herramientas y recursos disponibles e ir fortaleciéndose en el camino. Lo esencial es iniciar, incorporando progresivamente nuevas dimensiones y funcionalidades, como la digitalización de los registros, la integración de datos multisectoriales o el uso de alertas tempranas para la protección de las trayectorias educativas.</p>
+            <p><strong>El proceso de fortalecimiento de un SIGED es continuo</strong> y su éxito depende tanto de la capacidad para adaptarse a los cambios tecnológicos y sociales como de la voluntad de mejorar la gestión educativa con base en datos. En este sentido, avanzar con lo disponible permite no solo mejorar la eficiencia del sistema desde el inicio sino también generar aprendizajes que faciliten la incorporación de nuevas herramientas y enfoques, maximizando el impacto de las políticas educativas en beneficio de todos los y las estudiantes.</p>
+            <p>
+                A continuación, se presentan algunas prioridades a considerar en el fortalecimiento de los SIGED en Argentina:
+            </p>
+            <div class='tabs'>
+                <br><b>1. Digitalización completa y eficiente</b>
+                <div class='abrir'>
+                    <strong>Acelerar la transformación digital del sistema educativo</strong> eliminando completamente los procesos basados en papel y adoptando plataformas tecnológicas que permitan la recolección, almacenamiento y análisis de datos en tiempo real. Este proceso no solo incrementa la eficiencia administrativa, sino que mejora la calidad de los datos, facilita el acceso a información precisa y actualizada, fortaleciendo la toma de decisiones estratégicas y operativas en todos los niveles del sistema educativo.
+                </div>
+            
+                <br><b>2. Fortalecer los recursos técnicos, tecnológicos y de conectividad</b>
+                <div class='abrir'>
+                    <strong>Ampliar y modernizar la infraestructura informática y mejorar la conectividad de las instalaciones, además de dotar a las áreas de información educativa con equipos técnicos formados y suficientes</strong>, garantizando los niveles de financiamiento adecuados a estos requerimientos de forma sostenible. De esta forma se establecen las condiciones necesarias para el avance en el cumplimiento de este conjunto de prioridades.
+                </div>
+            
+                <br><b>3. Sistema Integral de Gestión Educativa (SIGED)</b>
+                <div class='abrir'>
+                <strong>Diseñar un sistema robusto y centralizado</strong> que unifique la información clave de todo el sistema educativo, incluyendo datos sobre matrícula, rendimiento académico, asistencia y recursos, de manera modular y flexible a través de una colección de unidades independientes e interoperables. Este Sistema de Información y Gestión Educativa (SIGED) debe permitir una visión completa del panorama educativo, facilitando la planificación, el monitoreo y la mejora continua de políticas públicas.
+                </div>
+            
+                <br><b>4. Consolidar un sistema nominal de estudiantes integrado a nivel nacional</b>
+                <div class='abrir'>
+                <strong>Definir de manera federal</strong> el tipo de variables que deben estar disponibles a nivel nacional y para otras jurisdicciones para usos que garanticen el acceso a información de movilidad de los/as estudiantes y el acceso a programas o recursos cuya distribución dependa de recursos nacionales.
+                </div>
+            
+                <br><b>5. Integración de fuentes sectoriales de Información</b>
+                <div class='abrir'>
+                <strong>Promover la interoperabilidad entre sistemas educativos y otras bases de datos</strong> como salud, bienestar social y empleo. Esta integración permitirá un enfoque integral sobre el estudiante, facilitando la identificación de factores de riesgo y necesidades específicas y permitiendo respuestas educativas y sociales más coordinadas y efectivas.
+                </div>
+            
+                <br><b>6. Ampliar la disponibilidad de información desagregada</b>
+                <div class='abrir'>
+                <strong>Fortalecer la identificación de poblaciones vulnerables</strong> (niños, niñas y adolescentes en situación de pobreza, con discapacidad, habitantes de zonas rurales aisladas, poblaciones indígenas y afrodescendientes, entre otras) para mejorar las herramientas de diagnóstico y seguimiento, poniendo la información al servicio del objetivo de avanzar hacia una educación inclusiva, equitativa y de calidad, sin dejar a nadie atrás desde una perspectiva que atienda también las desigualdades de género.
+                </div>
+            
+                <br><b>7. Expandir las fronteras de la información disponible</b>
+                <div class='abrir'>
+                <strong>Ampliar la generación de información hacia aquellas dimensiones no cubiertas por los SIGED actuales</strong>, tanto en aquellas dimensiones del sistema educativo que evidencian deudas históricas para la generación de información de calidad, como la atención educativa a la primera infancia o la formación profesional, como en aquellos ámbitos que han emergido más recientemente como dimensiones relevantes de la caracterización social y educativa de los/as estudiantes y sus familias (aspectos sociales y sanitarios).
+                </div>
+            
+                <br><b>8. Fortalecimiento de los Sistemas de Protección de Trayectorias Educativas</b>
+                <div class='abrir'>
+                <strong>Desarrollar e implementar sistemas robustos de protección de trayectorias educativas</strong> que no sólo identifiquen a tiempo a los estudiantes en riesgo de desvinculación, sino que también diseñen y ejecuten políticas efectivas que favorezcan la retención escolar. Para ello es central el diseño e implementación de Sistemas de Alerta Temprana (SAT) para acompañar las trayectorias y evitar la discontinuidad o el abandono escolar.
+                </div>
+            
+                <br><b>9. Transparencia y acceso abierto a la información educativa</b>
+                <div class='abrir'>
+                <strong>Asegurar que la información educativa sea accesible, clara y transparente</strong> para todos los actores del sistema: desde las madres y los padres hasta los y las responsables de políticas educativas. Garantizar la lecturabilidad de la información en función del público al que se dirige. Promover la transparencia genera confianza y fomenta la colaboración entre la comunidad educativa y las autoridades, creando un entorno de mejora continua basado en datos​.
+                </div>
+            
+                <br><b>10. Adaptabilidad ante cambios y emergencias</b>
+                <div class='abrir'>
+                <strong>Establecer mecanismos flexibles y ágiles en el SIGED</strong> para responder rápidamente a cambios inesperados en el contexto educativo, como crisis sanitarias o desastres naturales. Esto incluye el desarrollo de protocolos de emergencia y la implementación de herramientas de gestión que permitan ajustes inmediatos en los procesos educativos.
+                </div>
+            
+                <br><b>11. Capacitación en el Uso Estratégico de Datos</b>
+                <div class='abrir'>
+                <strong>Formar a docentes, directivos, supervisores, funcionarios y autoridades en el análisis y uso de datos</strong> nominalizados para la toma de decisiones educativas. Esto incluye la interpretación de indicadores clave, el uso de herramientas tecnológicas y la aplicación de estos conocimientos en contextos específicos para mejorar el rendimiento estudiantil, la gestión escolar, el diseño, implementación, monitoreo y evaluación de políticas y el seguimiento al cumplimiento de los objetivos educativos establecidos.
+                </div>
+            
+                <br><b>12. Actualización normativa para el uso seguro de datos</b>
+                <div class='abrir'>
+                <strong>Revisar y modernizar los marcos legales que regulan el uso de datos educativos</strong> para garantizar su accesibilidad segura y proteger la privacidad de establecimientos, estudiantes y docentes. Estos marcos deben alinearse con los desarrollos tecnológicos actuales, incluyendo el uso de inteligencia artificial y análisis oportuno, en tiempo real, asegurando la protección de la identidad digital en todo momento.
+                </div>
+            
+                <br><b>13. Colaboración regional e interjurisdiccional</b>
+                <div class='abrir'>
+                <strong>Fomentar la colaboración entre jurisdicciones y países de la región</strong> para compartir experiencias, buenas prácticas y soluciones tecnológicas en el uso de SIGED y los sistemas de protección de trayectorias educativas. Este intercambio permitirá mejorar la implementación de sistemas de gestión educativa basados en evidencia y enfrentar de manera conjunta los desafíos comunes​.
+                </div>
+            
+                <br><b>14. Incrementar el conocimiento sobre la producción y uso de información a través de los SIGED</b>
+                <div class='abrir'>
+                <strong>Sistematizar lecciones aprendidas y experiencias a nivel local y regional</strong> para consolidar un conjunto de evidencias que permitan identificar las estrategias más adecuadas para avanzar hacia el fortalecimiento de los SIGED, los modos de uso que más contribuyen a consolidarlos como herramienta para la mejora educativa, y las herramientas que favorecen su incorporación progresiva en todos los niveles de gestión del sistema educativo.
+                </div>
+            </div>
+            
+        </div>
+
+         
+    </div>
+
+
+
+
+
+    <!-- <div class='page'>
+        <h1>Desarrollos en curso</h1>
+
+
+    </div>-->
+
+
+
+
+
+
+
+    <div class='page' style="height:auto;min-height:auto;">
+        <h1>Suscripción</h1>
+        <br>
+
+        <p>Los y las invitamos a completar este formulario para recibir información, publicaciones y avances de la agenda de las Mesas de Fortalecimiento de los SIGED en Argentina
+
+         
+            
+        </p><br>
+        <button class='suscribite' >
+            <h2>Suscribirse</h2>
+        </button>
+    </div>
+
+
+    <div class='page' style='min-height: auto;background-color: white;'>
+
+
+        <div class='logos'>
+            <img src='Oei-saie-bid.jpg'>
+
+
+        </div>
+    </div>
+
+
+
+<footer>
+    <a href='http://edu.gustavodetanti.com' target='_blank'>web dev: GDT</a>
+</footer>
+
+
+
+    <script>
+
+        const TIMELINE = [
+            { date: "1993", text: "Operativo Nacional de Evaluación (ONE)" },
+            { date: "1994", text: "Censo de personal de los  establecimientos educativos " },
+            { date: "1996", text: "Relevamiento Anual (RA)" },
+            { date: "1998", text: "Censo Nacional de infraestructura escolar " },
+            { date: "2000", text: "Sistemas de información nominales jurisdiccionales" },
+            { date: "2004", text: "Censo de personal de los  establecimientos educativos" },
+            { date: "2008", text: "Relevamiento de Escuelas Rurales" },
+            { date: "2009", text: "Censo de infraestructura escolar" },
+            { date: "2012", text: "Sistema Integral de Información Digital Educativa (SInIDE)" },
+            { date: "2014", text: "Censo de personal de los establecimientos educativos" },
+            { date: "2016", text: "Programa Aprender" },
+            { date: "2018", text: "Programa Cédula Escolar Nacional" },
+            { date: "2021", text: "Base Nacional Homologada" },
+            { date: "2022", text: "SInIDE SGE (Aplicativo)" },
+            { date: "2023", text: "Sistema de integración de Trayectorias Escolares" }
+        ];
+
+        const MESAS = [
+            { date: "23 may 2023", text: "<b>Primera mesa</b><br>Federalismo y gobernanza<br>Sede: OEI", linkText: "Minuta en pdf", _link: "about:blank" },
+            { date: "3 ago 2023", text: "<b>Segunda mesa</b><br>Aspectos normativos de los datos estadísticos administrativos<br>Sede: BID", _linkText: "Minuta en pdf", _link: "about:blank" },
+            { date: "26 sep 2023", text: "<b>Tercera mesa</b><br>Condiciones estructurales<br>Sede: OEI", _linkText: "Minuta en pdf", _link: "about:blank" },
+            { date: "28 nov 2023", text: "<b>Cuarta mesa</b><br>Uso de información en gestión territorial y escolar en procesos y problemáticas pedagógicas.<br>Sede: BID", _linkText: "Minuta en pdf", _link: "about:blank" },
+           
+            { date: "23 may 2024", text: "<b>Quinta mesa</b><br>Usos de los SIGED, de los SAT y de los productos de los sistemas de información en el sector educativo<br>Sede: OEI", _linkText: "Minuta en pdf", _link: "about:blank" },
+            { date: "5 sep 2024", text: "<b>Sexta mesa</b><br>Producción de conocimiento<br>Sede: Flacso", _linkText: "Minuta en pdf", _link: "about:blank" }
+            ,
+            { date: "29 nov 2024", text: "<b>Séptima mesa</b><br>Producción de información y usos de SIGED y SAT que tengan como destinatario a equipos territoriales y de supervisión/inspección escolar.<br>Tandil  <br> ", _linkText: "Minuta en pdf", _link: "about:blank" }
+        ];
+
+     
+
+
+    </script>
+
+    <script src='js/Pages.bundle.js?r=11'></script>
+    <script src='js/Mapa.js?r=11'></script>
+    <script src='js/jquery.min.js'></script>
+    <script>
+        let desplegables;
+        document.addEventListener("DOMContentLoaded", () => {
+
+document.querySelector('.suscribite').addEventListener('click',()=>{
+  window.open('https://forms.gle/wd19xcx1F8F1chzN9');
+});
+            desplegables = [...document.querySelectorAll('.apartado .abrir')].map(d => { return Desplegable(d) });
+
+
+        });
+
+        let DC = 0;
+        function Desplegable(div) {
+            let opened = false;
+            let id = DC++;
+            let button = div.previousElementSibling;
+            button.classList.add('abrirBut');
+            button.addEventListener('click', clk);
+
+            let img = new Image();
+           // let img = document.createElementNS("http://www.w3.org/2000/svg",'svg');// Image();
+
+            img.src = 'arrow.svg';
+         
+            button.parentNode.appendChild(img);
+        /*    img.outerHTML=`<svg class='arrow' width='40' height='40' viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+<circle r="18" cx='20' cy='20' fill='none' stroke='#ffffffaa' stroke-width='2'/>   
+<path d="M9,17 L20,27 31,17"  fill='none' stroke='#ffffffaa' stroke-width='3'/>
+</svg>`;*/
+ img.classList.add('arrow');
+            img.addEventListener('click', clk);
+
+            function clk(e) {
+                if (opened) {
+                    //    div.style.display='none';
+                    close();
+                } else {
+                   // Ensure element is visible for measurement
+$(div).height(); 
+
+
+                  $(div).slideDown(); 
+                  button.classList.add('opened');
+                    img.classList.add('opened');
+                    opened = true;
+                    desplegables.forEach(element => {
+                        if (element.isOpened() && element.id != id) element.close();
+                    });
+
+                }
+
+            }
+
+            function close() {
+                button.classList.remove('opened');
+               $(div).slideUp();
+
+      
+
+                img.classList.remove('opened');
+                opened = false;
+            }
+
+            function isOpened() { return opened }
+
+            return { close, id, isOpened }
+        }
+
+
+
+        function easeInOut(t) {
+            return t < 0.5
+                ? 2 * t * t
+                : -1 + (4 - 2 * t) * t;
+        }
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
