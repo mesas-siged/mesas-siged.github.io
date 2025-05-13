@@ -7,9 +7,550 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESAS SIGED</title>
 
-    
     <style>
-@import "style.css";
+        * {
+            font-family: sans-serif;
+            letter-spacing: 1pt;
+        }
+
+        p {
+            font-weight: 200;
+            max-width: 70vw;
+        }
+
+        body {
+            margin: 0px;
+            color: #4e5c57;
+        }
+
+        .page {
+            min-height: 70vh;
+            padding: 40px;
+            position: relative;
+        }
+
+        .page h1 {
+            font-size: 60px;
+            font-size: 4vw;
+            line-height: calc(4vw * 1);
+            color: #555555;
+            max-width: 800px;
+            display: inline-block;
+        }
+
+        .page.gray h1 {
+            color: #eeeeee;
+        }
+
+        .gray {
+            background-color: #4e5c57;
+            color: white;
+        }
+
+        .box {
+            display: inline-block;
+            margin: 0 16px 16px 0;
+            padding: 32px 46px;
+            border: 0px solid #bbbbbb;
+            background-color: rgb(97, 187, 49);
+            /*color: #333333;*/
+            border-radius: 18px;
+            font-size: 18px;
+            color: white;
+
+        }
+
+        .box:nth-child(2) {
+            background-color: rgb(84, 162, 43);
+        }
+
+        .box:nth-child(3) {
+            background-color: rgb(74, 135, 41);
+        }
+
+
+
+        .mesas-svg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            vertical-align: middle;
+            display: inline-block;
+            z-index: -1;
+            width: 78%;
+        }
+
+        .rollable {
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+
+            opacity: 1;
+        }
+
+        .rollable:hover {
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+
+
+        }
+
+
+
+        span.number {
+            font-size: 42px;
+            vertical-align: middle;
+            font-weight: 600;
+        }
+
+        .box-mesachica {
+            line-height: 32px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .box-mesachica span.number1 {
+            font-size: 18px;
+            vertical-align: middle;
+            font-weight: 600;
+            color: rgb(58, 219, 255);
+        }
+
+        .timelinecont {
+
+            width: 100%;
+            overflow-x: scroll;
+
+        }
+
+
+        .dimensiones {
+            display: flex;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flexAuto {
+            display: flex;
+            align-items: center;
+        }
+
+        .flexAuto>*:nth-child(1) {
+            padding: 0px;
+            flex: 1;
+            text-align: right;
+        }
+
+        .flexAuto>*:nth-child(2) {
+            padding: 20px;
+            flex: 5;
+        }
+
+        .flex>div {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .dimensiones .dbox {
+            flex: 1;
+            margin: 0;
+            padding: 32px;
+            border: 0px solid #bbbbbb;
+
+            color: #333333;
+            border-radius: 0px;
+
+
+        }
+
+
+
+        .dimensiones .dbox ul {
+
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dimensiones .dbox ul li {
+            padding: 20px 0;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .flex>div.Mbox {
+            padding: 0;
+            margin: 0;
+        }
+
+        .suscribite {
+
+            padding: 8px 20px;
+            border: 0px solid #555555;
+            background-color: #c2e98a;
+            margin: 20px;
+            border-radius: 16px;
+            cursor:pointer;
+            transition: all 0.3s ease-in-out;
+        }
+.suscribite:hover{
+    background-color:#555555;
+           color: #c2e98a;
+           transition: all 0.3s ease-in-out;
+}
+
+        .pdfs a {
+            display: inline-block;
+            margin: 0 12px 12px 0;
+            text-decoration: none;
+            color: #61a007;
+            transition: color 0.5s ease-in-out;
+        }
+
+        .pdfs a:hover {
+            transition: color 0.5s ease-in-out;
+            color: #3c5e0b;
+        }
+
+        .pdfs a img {
+            height: 300px;
+        }
+
+
+
+        .page.dark {
+            background-color: #313a37;
+            color: rgb(220, 220, 220);
+        }
+
+        .page.dark h1 {
+            color: rgb(187, 187, 187);
+        }
+
+ 
+
+
+        @media(max-width: 956px) {
+
+            h1 {
+
+                font-size: 6vw !important;
+                line-height: 6vw !important;
+            }
+
+            .page {
+                min-height: 70vh;
+                padding: 16px;
+                position: relative;
+            }
+
+            .flex {
+                display: block;
+            }
+
+            .flexAuto {
+                display: block;
+                align-items: center;
+            }
+
+            .flexAuto span {
+                display: block;
+                text-align: left;
+            }
+
+            .flexAuto>*:nth-child(1) {
+                text-align: left;
+                margin-top: 20px;
+            }
+
+            .flexAuto>*:nth-child(2) {
+                padding: 0px;
+
+            }
+
+            .dimensiones {
+                display: block;
+            }
+
+            .pdfs a img {
+            height: 200px;
+        }
+
+        }
+
+        .thumb {
+            width: 80px;
+            display: inline-block;
+        }
+
+        .logos {
+            text-align: center;
+        }
+
+        .logos img {
+            width: 100%;
+            max-width: 1200px;
+
+        }
+
+        .logos img.uno {
+            width: 50%;
+            max-width: 600px;
+
+        }
+
+
+        /*MAPA*/
+        .pop {
+            position: absolute;
+            display: none;
+            width: 240px;
+            padding: 12px;
+            background-color: #ffffffee;
+            border: 0px solid #ffffff;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 18px;
+            color: #131313;
+        }
+
+        .mapa {
+            background-color: #313a37;
+            position: relative;
+        }
+
+        svg #features path.tipo_sinide {
+            fill: #1874ae;
+        }
+
+        svg #features path.tipo_siged {
+            fill: #9ee37d88;
+        }
+
+        svg #features path.tipo_propio {
+            fill: rgb(154, 201, 14);
+        }
+
+        svg #features path.tipo_noinfo {
+            fill: #04364b;
+        }
+
+        svg #features>path.over {
+            fill: #111111;
+        }
+
+
+
+
+
+        svg #label_points circle {
+
+            fill: #aaaaaaaa;
+            stroke: #11111166;
+            stroke-width: 3;
+            cursor: pointer;
+            display: none;
+        }
+
+        svg #label_points circle:hover {
+            stroke: #eeeeee;
+            fill: #ffffff;
+
+        }
+
+
+
+
+
+
+
+        .apartado {
+            position: relative;
+            display: block;
+            margin: 0 16px 16px 0;
+            padding: 32px 46px 46px;
+            border: 0px solid #bbbbbb;
+            background-color: rgb(84, 162, 43);
+            /*color: #333333;*/
+            border-radius: 24px;
+            font-size: 18px;
+            color: white;
+
+
+
+
+        }
+
+        @media(max-width: 956px) {
+            .apartado {
+                background-color:#ffffff00;
+                margin:60px 8px 80px 8px;
+                padding: 0;
+                border-bottom: 6px solid #ffffff33;
+            }
+            .apartado h2{
+color: rgb(126, 223, 74);
+            }
+                 .apartado .boxCat{ 
+                     border: 1px solid #ffffff33;
+                 } 
+            }
+
+        .apartado .abrir {
+            display: none;
+            margin-top: 24px;
+            box-sizing: border-box;
+
+
+            
+        }
+
+        .apartado .abrir.hided {
+            display: none;
+            margin-top: 24px;
+            box-sizing: border-box;
+
+
+            
+        }
+
+        .apartado .abrir .ul {
+            position: relative;
+            margin: 0 0 16px 0;
+        }
+
+        .apartado .abrir .ul .li {
+            font-size: 24px;
+            position: relative;
+            margin: 0px 0 0 0;
+            transform-origin: left;
+            transform: scale(0.7);
+        }
+
+        .apartado h3 {
+            margin: 0px;
+            position: relative;
+            max-width: calc( 100% - 40px);
+        }
+
+        .apartado h4 {
+            margin: 0px;
+            position: relative;
+            max-width: calc( 100% - 40px);
+        }
+
+        .apartado .boxCat {
+            position: relative;
+            background-color: rgb(61, 99, 95);
+            margin: 4px 0px 4px 0px;
+            padding: 24px;
+            border-radius: 16px;
+
+        }
+
+        .apartado .boxSubCat {
+            position: relative;
+            background-color: rgb(90, 135, 130);
+            margin: 4px 0px 4px 0px;
+            padding: 24px;
+            border-radius: 10px;
+        }
+
+        .apartado .boxSubCat:nth-child(2) {
+            margin: 26px 0px 4px 0px;
+        }
+
+        .apartado .boxSubCat:last-child {
+            margin: 4px 0px 20px 0px;
+        }
+
+        .apartado .abrirBut {
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+
+        }
+
+        .apartado .abrirBut:hover, .apartado .abrirBut.opened{
+            color:  #94d6ff;
+        }
+
+        .apartado .abrirBut:hover svg path, .apartado .abrirBut.opened  svg path{
+            stroke:  #94d6ff;
+        }
+
+        .apartado .arrow {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+            margin: 16px;
+            transform: rotate(-90deg) scale(0.8);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .apartado .arrow.opened {
+            transform: rotate(0deg) scale(0.8);
+            transition: transform 0.4s ease-in-out;
+        }
+        #color-list li {
+    position: relative;
+    padding-left: 30px; /* Space for the colored bar */
+    margin: 5px 0;
+}
+
+/* Style for the left color bar */
+#color-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+}
+#color-list li:nth-child(1)::before {
+background-color: #9ee37d88; /* Will be set by JavaScript */
+}
+#color-list li:nth-child(2)::before {
+background-color: #1874ae; /* Will be set by JavaScript */
+}
+#color-list li:nth-child(3)::before {
+background-color: rgb(154, 201, 14); /* Will be set by JavaScript */
+}
+#color-list li:nth-child(4)::before {
+background-color: #04364b; /* Will be set by JavaScript */
+}
+.tabs{
+    font-size: 18px;
+line-height: 22px;
+}
+.tabs b{
+    color:#111111;
+}
+.tabs .abrir{
+    margin: 12px;
+    padding:24px;
+}
+
+footer{
+    padding:24px;
+    padding-top:60px;
+    background: #efefef;
+    text-align: right;
+    padding:24px 5%;
+color:#999999;
+font-size: 12px;    
+}
+footer a,footer a:visited{
+    color:#bbbbbb;
+font-size: 12px;    
+text-decoration: none;
+}
+footer a:hover{
+    color:#888888;
+font-size: 12px;    
+text-decoration: none;
+}
     </style>
 </head>
 
@@ -440,7 +981,6 @@
                           <div class='li'>
                         ¿Quiénes son los/as usuarios/as más habituales de la información nominalizada?
                     </div>
-                            
                     <div class='li'> ¿A qué nivel
                         de gestión
                         pertenecen y qué tipo de función cumplen? 
@@ -549,7 +1089,8 @@
 
         <div class='pdfs'>
 
-
+            <a target='_blank' href='https://www.unicef.org/argentina/informes/unicef-oei-sistema-integral-de-informacion-digital-educativa-sinide' title="UNICEF-OEI Sistema Integral de Información Digital Educativa (SInIDE)"><img
+                src='pdf/sinIDE.png'></a>
 
 
             <a target='_blank' href='https://oei.int/oficinas/argentina/publicaciones/documento-hacia-el-fortalecimiento-de-un-sistema-nacional-de-informacion-educativa-en-clave-nominalizada/' title="Aspectos normativos.pdf"><img
@@ -791,7 +1332,12 @@
             { date: "5 sep 2024", text: "<b>Sexta mesa</b><br>Producción de conocimiento<br>Sede: Flacso", linkText: "Minuta en pdf", link: "mesas/06_PresentacionMesa6_05-9-2024.docx.pdf" }
             ,
             { date: "29 nov 2024", text: "<b>Séptima mesa</b><br>Producción de información y usos de SIGED y SAT que tengan como destinatario a equipos territoriales y de supervisión/inspección escolar.<br>Tandil  <br> ", _linkText: "Minuta en pdf", _link: "about:blank" }
-        ];
+       
+            ,
+            { date: "6 mar 2025", text: "<b>Octava mesa</b><br>Sistemas de protección de trayectorias educativas en Argentina y en otros países de la región.<br>Sede: BID<br> ", _linkText: "Minuta en pdf", _link: "about:blank" }
+ 
+
+        ].reverse();
 
    
 
