@@ -223,7 +223,7 @@
         }
    ,//g4
         {
-            "Jurisdiccion": "Tucuman",
+            "Jurisdiccion": "Tucumán",
             "Tipo": "Sin información",
             "Nombre":"Sin información",
             "Nivel_ensenanza": "",
